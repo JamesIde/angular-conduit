@@ -57,6 +57,7 @@ export async function retrieveUserByEmail(email: string): Promise<UserSession> {
       name: true,
       bio: true,
       createdAt: true,
+      image: true,
     },
   });
   return user;

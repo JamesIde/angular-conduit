@@ -120,6 +120,7 @@ export async function loginUser(
       name: user.name,
       username: user.username,
       bio: user.bio,
+      image: user.image,
     } as any;
     return RedisService.setAndReturnSession(res, login);
   } catch (error) {

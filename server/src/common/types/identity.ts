@@ -10,5 +10,5 @@ export type UserLogin = Pick<User, "email"> & {
 
 export type UserSession = Pick<
   User,
-  "id" | "bio" | "name" | "username" | "createdAt" | "email"
+  "id" | "bio" | "name" | "username" | "createdAt" | "email" | "image"
 >;
