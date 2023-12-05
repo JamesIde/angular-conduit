@@ -1,4 +1,10 @@
 <app-header></app-header>
-<div class="mx-auto h-full w-full border-2 md:w-full lg:w-[75%] xl:w-[50%]">
+<div
+  class="mx-auto mt-4 h-full w-full border-2 md:w-full lg:w-[75%] xl:w-[50%]"
+>
   <router-outlet></router-outlet>
 </div>
+<ng-http-loader
+  [backdropBackgroundColor]="'#000000'"
+  spinner="sk-double-bounce"
+></ng-http-loader>

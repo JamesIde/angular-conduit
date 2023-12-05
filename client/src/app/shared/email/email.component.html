@@ -1,0 +1,22 @@
+<mat-form-field class="mb-1 mt-1 w-full" appearance="fill">
+  <mat-label>Email</mat-label>
+  <input
+    matInput
+    type="text"
+    [formControl]="control"
+    autocomplete="new-email"
+  />
+  <mat-spinner
+    matSuffix
+    [diameter]="25"
+    color="accent"
+    class="mr-3"
+    *ngIf="control?.pending"
+  ></mat-spinner>
+  <mat-error *ngIf="control?.hasError('required')">
+    Email is required
+  </mat-error>
+  <mat-error *ngIf="control?.hasError('pattern')">
+    Email is invalid. Please ensure you enter a valid email you have access to.
+  </mat-error>
+</mat-form-field>
