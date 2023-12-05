@@ -16,6 +16,7 @@ model User {
   email       String        @unique
   name        String        @unique
   bio         String        @default("")
+  image       String        @default("https://static.productionready.io/images/smiley-cyrus.jpg")
   updatedAt   DateTime      @updatedAt
   createdAt   DateTime      @default(now())
   Credentials Credentials[]

@@ -22,6 +22,7 @@ export async function createUser(user: any): Promise<UserSession> {
       name: true,
       bio: true,
       createdAt: true,
+      image: true,
     },
   });
 }
