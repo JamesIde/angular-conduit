@@ -1,24 +1,22 @@
 <div class="mx-auto flex max-w-md flex-col">
   <h1>Login</h1>
-  <form [formGroup]="form" class="mb-10 flex flex-col">
+  <p>
+    Don't have an account?
+    <span
+      class="cursor-pointer font-medium text-blue-500"
+      [routerLink]="['/auth/register']"
+    >
+      Register</span
+    >
+  </p>
+  <form [formGroup]="form" class="mb-5 flex flex-col">
     <app-email [control]="form.controls['email']" />
-    <app-password [control]="form.controls['password']" />
+    <app-password [control]="form.controls['password']" [label]="'Password'" />
+    <app-login-register-button
+      [label]="'Login'"
+      (click)="handleSubmit()"
+      [loading]="loading"
+      class="mt-10"
+    />
   </form>
-  <button mat-raised-button (click)="handleSubmit()" [disabled]="loading">
-    <ng-container *ngIf="!loading; else spinnerTemplate">
-      <div class="flex items-center gap-2">
-        <span>Login</span>
-      </div>
-    </ng-container>
-    <ng-template #spinnerTemplate>
-      <div class="flex items-center gap-2">
-        <mat-spinner
-          matSuffix
-          [diameter]="18"
-          color="accent"
-          class="mr-3"
-        ></mat-spinner>
-      </div>
-    </ng-template>
-  </button>
 </div>

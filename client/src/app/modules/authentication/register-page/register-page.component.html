@@ -1,1 +1,33 @@
-<p>register-page works!</p>
+<div class="mx-auto flex max-w-md flex-col">
+  <h1>Register</h1>
+  <p>
+    Already have an account?
+    <span
+      class="cursor-pointer font-medium text-blue-500"
+      [routerLink]="['/auth/login']"
+    >
+      Login</span
+    >
+  </p>
+
+  <form [formGroup]="form" class="mb-5 flex flex-col">
+    <app-email [control]="form.controls['email']" />
+    <app-username [control]="form.controls['username']" class="mb-4" />
+    <app-password
+      [control]="form.controls['password']"
+      [label]="'Password'"
+      class="mb-4"
+    />
+    <app-password
+      [control]="form.controls['confirmPassword']"
+      [label]="'Confirm Password'"
+      class="mb-4"
+    />
+    <app-login-register-button
+      [label]="'Register'"
+      (click)="handleSubmit()"
+      [loading]="loading"
+      class="mt-2 w-full"
+    />
+  </form>
+</div>

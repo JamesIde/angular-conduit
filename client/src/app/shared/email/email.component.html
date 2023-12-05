@@ -16,6 +16,15 @@
   <mat-error *ngIf="control?.hasError('required')">
     Email is required
   </mat-error>
+  <mat-error *ngIf="control?.hasError('inuse')">
+    An account already exists with this email address.
+    <span
+      [routerLink]="['/auth/login']"
+      routerLinkActive="router-link-active"
+      class="cursor-pointer underline"
+      >Login?</span
+    >
+  </mat-error>
   <mat-error *ngIf="control?.hasError('pattern')">
     Email is invalid. Please ensure you enter a valid email you have access to.
   </mat-error>

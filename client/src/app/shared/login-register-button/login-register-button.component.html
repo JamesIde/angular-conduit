@@ -1,0 +1,12 @@
+<button mat-raised-button [disabled]="loading">
+  <ng-container *ngIf="!loading; else spinnerTemplate">
+    <div class="flex items-center">
+      <span>{{ label }}</span>
+    </div>
+  </ng-container>
+  <ng-template #spinnerTemplate>
+    <div class="flex items-center">
+      <mat-spinner matSuffix [diameter]="18" color="accent"></mat-spinner>
+    </div>
+  </ng-template>
+</button>

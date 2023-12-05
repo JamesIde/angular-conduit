@@ -3,6 +3,7 @@ import {
   AsyncValidatorFn,
   UntypedFormGroup,
   ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
 import { AuthenticationService } from '../../modules/authentication/authentication.service';
 import {
@@ -11,6 +12,7 @@ import {
   distinctUntilChanged,
   map,
   switchMap,
+  take,
 } from 'rxjs';
 
 export class FormUtils {
@@ -32,32 +34,54 @@ export class FormUtils {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return control.valueChanges.pipe(
         debounceTime(500),
-        distinctUntilChanged(),
+        take(1),
         switchMap(() =>
           service.checkEmailExists(control.value).pipe(
             map((res) => {
-              return res ? { inuse: true } : null;
+              return res.exists ? { inuse: true } : null;
             }),
           ),
         ),
       );
     };
   }
+
   static UsernameExistsValidator(
     service: AuthenticationService,
   ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return control.valueChanges.pipe(
         debounceTime(500),
-        distinctUntilChanged(),
+        take(1),
         switchMap(() =>
           service.checkUsernameExists(control.value).pipe(
             map((res) => {
-              return res ? { inuse: true } : null;
+              return res.exists ? { inuse: true } : null;
             }),
           ),
         ),
       );
+    };
+  }
+
+  static PasswordsMatchValidator(
+    password: string,
+    confirmPassword: string,
+  ): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const passwordControl = control.get(password);
+      const confirmPasswordControl = control.get(confirmPassword);
+
+      if (
+        passwordControl?.value !== confirmPasswordControl?.value &&
+        confirmPasswordControl?.touched
+      ) {
+        confirmPasswordControl?.setErrors({ noMatch: true });
+        return { passwordsMatch: true };
+      } else {
+        confirmPasswordControl?.setErrors(null);
+        return null;
+      }
     };
   }
 }

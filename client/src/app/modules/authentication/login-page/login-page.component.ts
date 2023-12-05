@@ -14,6 +14,8 @@ import { Login } from '../../../core/interfaces/login';
 import { AuthenticationService } from '../authentication.service';
 import { takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { LoginRegisterButtonComponent } from '../../../shared/login-register-button/login-register-button.component';
 @Component({
   selector: 'app-login-page',
   standalone: true,
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     EmailComponent,
     PasswordComponent,
+    RouterModule,
+    LoginRegisterButtonComponent,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
@@ -46,9 +50,10 @@ export class LoginPageComponent
   }
 
   handleSubmit() {
-    this.form.markAllAsTouched();
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       FormUtils.printFormErrors(this.form);
+      return;
     }
 
     const user = {} as Login;

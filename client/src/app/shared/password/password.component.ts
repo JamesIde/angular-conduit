@@ -11,4 +11,12 @@ import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 })
 export class PasswordComponent {
   @Input() control = new UntypedFormControl();
+  @Input() showRegisterPasswordHint: boolean = false;
+  @Input() label: string = '';
+
+  showPassword: boolean = false;
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }

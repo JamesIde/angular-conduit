@@ -158,12 +158,12 @@ export async function checkUsernameExists(
   next: NextFunction
 ) {
   try {
-    const { userName: username } = req.body;
+    const { username } = req.body;
 
     let exists = false;
 
     if (!username) {
-      res.json(200).json({ exists });
+      res.status(HttpStatus.OK).json({ exists });
     }
     const user = await identityRepository.findUserByUsername(username);
 

@@ -5,6 +5,7 @@ import { environment } from '../../../environment/environment';
 import { ApiConstants } from '../../core/constants/api.constants';
 import { Login } from '../../core/interfaces/login';
 import { AuthSuccess } from '../../core/interfaces/auth.success';
+import { Register } from '../../core/interfaces/register';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,16 @@ export class AuthenticationService {
   login(user: Login) {
     return this.http.post<AuthSuccess>(
       environment.apiBaseUrl + ApiConstants.LOGIN,
+      user,
+      {
+        observe: 'response',
+      },
+    );
+  }
+
+  register(user: Register) {
+    return this.http.post<AuthSuccess>(
+      environment.apiBaseUrl + ApiConstants.REGISTER,
       user,
       {
         observe: 'response',
