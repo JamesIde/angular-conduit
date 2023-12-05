@@ -12,6 +12,7 @@
 
   <form [formGroup]="form" class="mb-5 flex flex-col">
     <app-email [control]="form.controls['email']" />
+    <app-name [control]="form.controls['name']" />
     <app-username [control]="form.controls['username']" class="mb-4" />
     <app-password
       [control]="form.controls['password']"
@@ -27,6 +28,7 @@
       [label]="'Register'"
       (click)="handleSubmit()"
       [loading]="loading"
+      [disabled]="loading"
       class="mt-2 w-full"
     />
   </form>

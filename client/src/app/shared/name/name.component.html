@@ -1,0 +1,23 @@
+<mat-form-field class="mb-1 mt-1 w-full" appearance="fill">
+  <mat-label>Full Name</mat-label>
+  <input matInput type="text" [formControl]="control" />
+  <mat-spinner
+    matSuffix
+    [diameter]="25"
+    color="accent"
+    class="mr-3"
+    *ngIf="control?.pending"
+  ></mat-spinner>
+  <mat-error *ngIf="control?.hasError('required')">
+    Full name is required
+  </mat-error>
+  <mat-error *ngIf="control?.hasError('maxlength')">
+    Full Name cannot exceed 50 characters.
+  </mat-error>
+  <mat-error *ngIf="control?.hasError('minlength')">
+    Full Name cannot be less than 3 characters.
+  </mat-error>
+  <mat-error *ngIf="control?.hasError('pattern')">
+    Full Name contains invalid characters.
+  </mat-error>
+</mat-form-field>

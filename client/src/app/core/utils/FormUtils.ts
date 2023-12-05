@@ -71,7 +71,8 @@ export class FormUtils {
     return (control: AbstractControl): ValidationErrors | null => {
       const passwordControl = control.get(password);
       const confirmPasswordControl = control.get(confirmPassword);
-
+      // Slightly different validator as it grabs the control of the form
+      // And sets errors like that
       if (
         passwordControl?.value !== confirmPasswordControl?.value &&
         confirmPasswordControl?.touched
@@ -79,7 +80,6 @@ export class FormUtils {
         confirmPasswordControl?.setErrors({ noMatch: true });
         return { passwordsMatch: true };
       } else {
-        confirmPasswordControl?.setErrors(null);
         return null;
       }
     };

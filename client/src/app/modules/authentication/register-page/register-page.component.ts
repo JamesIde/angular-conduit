@@ -17,6 +17,7 @@ import { UsernameComponent } from '../../../shared/username/username.component';
 import { PasswordComponent } from '../../../shared/password/password.component';
 import { Register } from '../../../core/interfaces/register';
 import { LoginRegisterButtonComponent } from '../../../shared/login-register-button/login-register-button.component';
+import { NameComponent } from '../../../shared/name/name.component';
 
 @Component({
   selector: 'app-register-page',
@@ -31,6 +32,7 @@ import { LoginRegisterButtonComponent } from '../../../shared/login-register-but
     PasswordComponent,
     MaterialModule,
     LoginRegisterButtonComponent,
+    NameComponent,
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
