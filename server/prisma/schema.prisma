@@ -14,7 +14,7 @@ model User {
   id          String        @id @default(uuid())
   username    String        @unique
   email       String        @unique
-  name        String        @unique
+  name        String
   bio         String        @default("")
   image       String        @default("https://static.productionready.io/images/smiley-cyrus.jpg")
   updatedAt   DateTime      @updatedAt

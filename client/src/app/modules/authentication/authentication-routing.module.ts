@@ -2,17 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { RoutingConstants } from '../../core/constants/routing.constants';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: RoutingConstants.LOGIN,
     component: LoginPageComponent,
-    title: 'Login',
+    title: RoutingConstants.LOGIN,
   },
   {
-    path: 'register',
+    path: RoutingConstants.REGISTER,
     component: RegisterPageComponent,
-    title: 'Register',
+    title: RoutingConstants.REGISTER,
   },
 ];
 

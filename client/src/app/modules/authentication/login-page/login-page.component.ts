@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoginRegisterButtonComponent } from '../../../shared/login-register-button/login-register-button.component';
+import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'app-login-page',
   standalone: true,
@@ -35,7 +36,10 @@ export class LoginPageComponent
   extends AbstractCommonFormComponent
   implements OnInit
 {
-  constructor(private authService: AuthenticationService) {
+  constructor(
+    private authService: AuthenticationService,
+    private userService: UserService,
+  ) {
     super();
   }
   loading: boolean = false;
@@ -60,15 +64,21 @@ export class LoginPageComponent
     user.email = this.form.value.email || '';
     user.password = this.form.value.password || '';
     this.loading = true;
-    this.authService.login(user).subscribe({
-      next: (response) => {
-        this.loading = false;
-        console.log(response);
-      },
-      error: (error) => {
-        this.loading = false;
-        console.log(error);
-      },
-    });
+    this.authService
+      .login(user)
+      .pipe(takeUntil(this.notifier))
+      .subscribe({
+        next: (response) => {
+          this.loading = false;
+          console.log(response);
+          if (response.body) {
+            this.userService.handleAuthSuccess(response.body);
+          }
+        },
+        error: (error) => {
+          this.loading = false;
+          console.log(error);
+        },
+      });
   }
 }

@@ -18,6 +18,8 @@ import { PasswordComponent } from '../../../shared/password/password.component';
 import { Register } from '../../../core/interfaces/register';
 import { LoginRegisterButtonComponent } from '../../../shared/login-register-button/login-register-button.component';
 import { NameComponent } from '../../../shared/name/name.component';
+import { takeUntil } from 'rxjs';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-register-page',
@@ -38,7 +40,10 @@ import { NameComponent } from '../../../shared/name/name.component';
   styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent extends AbstractCommonFormComponent {
-  constructor(private authService: AuthenticationService) {
+  constructor(
+    private authService: AuthenticationService,
+    private userService: UserService,
+  ) {
     super();
   }
   loading: boolean = false;
@@ -100,15 +105,21 @@ export class RegisterPageComponent extends AbstractCommonFormComponent {
       password: this.form.value.password || '',
     } as Register;
     this.loading = true;
-    this.authService.register(user).subscribe({
-      next: (res) => {
-        this.loading = false;
-        console.log(res);
-      },
-      error: (err) => {
-        this.loading = false;
-        console.log(err);
-      },
-    });
+    this.authService
+      .register(user)
+      .pipe(takeUntil(this.notifier))
+      .subscribe({
+        next: (res) => {
+          this.loading = false;
+          console.log(res);
+          if (res.body) {
+            this.userService.handleAuthSuccess(res.body);
+          }
+        },
+        error: (err) => {
+          this.loading = false;
+          console.log(err);
+        },
+      });
   }
 }
