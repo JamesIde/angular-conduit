@@ -1,22 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { AbstractCommonUser } from './abstractCommonUser';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-abstract-common-notifier',
+  selector: 'app-abstract-common-notifer',
   standalone: true,
   imports: [],
   template: ``,
   styles: [],
 })
-export class AbstractCommonNotifier implements OnInit, OnDestroy {
+export class AbstractCommonNotifier implements OnDestroy {
   notifier = new Subject<void>();
-
-  ngOnInit(): void {
-    console.log(`inside ng on init notifier common`);
-  }
-
-  canDeactivate() {}
 
   ngOnDestroy(): void {
     this.notifier.next();
