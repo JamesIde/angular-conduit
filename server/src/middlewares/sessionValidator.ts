@@ -19,7 +19,7 @@ export async function sessionValidator(
     if (!session) {
       throw new AppError("Invalid identity presented", HttpStatus.UNAUTHORIZED);
     }
-    req.userId = session;
+    req.userId = JSON.parse(session);
 
     next();
   } catch (error) {

@@ -78,3 +78,15 @@ export async function retrieveUserPasswordByEmail(email: string) {
   });
   return user;
 }
+
+export async function updateProfilePicture(userId: string, imageUrl: string) {
+  console.log(`test`, userId, imageUrl);
+  return await prisma.user.update({
+    data: {
+      image: imageUrl,
+    },
+    where: {
+      id: userId,
+    },
+  });
+}
