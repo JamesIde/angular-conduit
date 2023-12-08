@@ -42,9 +42,9 @@ import { UserService } from '../../../core/services/user.service';
 export class RegisterPageComponent extends AbstractCommonFormComponent {
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService,
+    userService: UserService,
   ) {
-    super();
+    super(userService);
   }
   loading: boolean = false;
   override ngOnInit(): void {}

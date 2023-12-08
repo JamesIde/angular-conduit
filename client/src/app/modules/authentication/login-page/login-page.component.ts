@@ -38,9 +38,9 @@ export class LoginPageComponent
 {
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService,
+    userService: UserService,
   ) {
-    super();
+    super(userService);
   }
   loading: boolean = false;
 
