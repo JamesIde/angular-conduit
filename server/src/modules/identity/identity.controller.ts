@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpStatus } from "../../common/enum/status";
 import { RedisService } from "../../redis/redis.service";
-import { ServerConstants } from "../../common/constants/server.constants";
 import * as bcrypt from "bcrypt";
 import * as identityRepository from "./identity.repository";
+import * as fileService from "../files/file.service";
 import AppError from "../../common/interface/AppError";
 import {
   UserLogin,
@@ -171,6 +171,40 @@ export async function checkUsernameExists(
       exists = true;
     }
     res.status(HttpStatus.OK).json({ exists });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function uploadProfilePicture(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const file = await fileService.uploadStreamAsync(req.file.buffer);
+
+    if (!file.url || !file.created_at) {
+      // Safety net - uploadStreamAsync contains error checking
+      throw new AppError(
+        `An error occured uploading image ${req.userId}`,
+        HttpStatus.BAD_REQUEST
+      );
+    }
+    const updatedUser = await identityRepository.updateProfilePicture(
+      req.userId,
+      file.url
+    );
+
+    if (!updatedUser) {
+      throw new AppError(
+        `An error occured updating user ${req.userId}`,
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
+    return res.status(HttpStatus.OK).json({
+      image: file.url,
+    });
   } catch (error) {
     next(error);
   }

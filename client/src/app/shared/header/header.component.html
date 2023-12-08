@@ -27,6 +27,7 @@
         class="h-10 w-10 rounded-full border-[1px] border-gray-700 hover:cursor-pointer"
         [src]="user.image"
         [alt]="user.username"
+        (click)="appService.openProfile()"
       />
       <a
         class="font-neutral-300 mx-3 mt-1 cursor-pointer text-lg duration-500 hover:text-primary"

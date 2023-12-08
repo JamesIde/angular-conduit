@@ -13,10 +13,12 @@ export class UserService {
 
   handleAuthSuccess(user: AuthSuccess) {
     this.$userSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/' + RoutingConstants.DASHBOARD]);
   }
 
   logout() {
+    localStorage.removeItem('user');
     this.$userSubject.next(null);
     this.router.navigate(['/auth/' + RoutingConstants.LOGIN]);
   }

@@ -17,6 +17,12 @@ export const ServerConfig = {
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   },
+  CLOUDINARY_CONFIGURATION: {
+    cloud_name: process.env.CLOUDINARY_API_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true,
+  },
   ROUTER_V1_PREFIX: (collection: string) => {
     return `/api/v1/${collection}`;
   },

@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { takeUntil } from 'rxjs';
-import { AbstractCommonNotifier } from '../../core/classes/abstractCommonNotifier';
+import { AbstractCommonUser } from '../../core/classes/abstractCommonUser';
 import { AuthSuccess } from '../../core/interfaces/auth.success';
 import { BannerComponent } from '../banner/banner.component';
+import { AppService } from '../../core/services/app.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,18 +14,15 @@ import { BannerComponent } from '../banner/banner.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent extends AbstractCommonNotifier implements OnInit {
-  constructor(protected userService: UserService) {
-    super();
+export class HeaderComponent extends AbstractCommonUser implements OnInit {
+  constructor(
+    protected appService: AppService,
+    userService: UserService,
+  ) {
+    super(userService);
+    super.ngOnInit();
   }
-  user: AuthSuccess | null = null;
-
-  override ngOnInit() {
-    this.userService.$userSubject
-      // .pipe(takeUntil(this.notifier))
-      .subscribe((user) => {
-        this.user = user;
-        console.log(this.user);
-      });
+  override ngOnInit(): void {
+    this.appService.openProfile();
   }
 }

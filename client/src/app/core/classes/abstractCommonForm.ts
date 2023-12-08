@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { AbstractCommonNotifier } from './abstractCommonNotifier';
+import { AbstractCommonUser } from './abstractCommonUser';
 
 @Component({
   selector: 'app-abstract-common',
@@ -10,7 +10,7 @@ import { AbstractCommonNotifier } from './abstractCommonNotifier';
   styles: [],
 })
 export class AbstractCommonFormComponent
-  extends AbstractCommonNotifier
+  extends AbstractCommonUser
   implements OnInit
 {
   form = new UntypedFormGroup({});
