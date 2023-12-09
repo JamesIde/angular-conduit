@@ -9,8 +9,8 @@ export class AppService {
 
   openProfile() {
     this.dialog.open(ProfileComponent, {
-      minWidth: '375px',
-      minHeight: '375px',
+      minWidth: '400px',
+      minHeight: '400px',
       disableClose: true,
     });
   }

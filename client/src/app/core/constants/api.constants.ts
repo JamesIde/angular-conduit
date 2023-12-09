@@ -4,5 +4,5 @@ export const ApiConstants = {
   LOGIN: 'identity/login',
   REGISTER: 'identity/register',
   UPDATE_BIO: 'identity/bio',
-  UPLOAD_IMAGE: 'identity/image',
+  UPLOAD_IMAGE: 'identity/upload',
 };

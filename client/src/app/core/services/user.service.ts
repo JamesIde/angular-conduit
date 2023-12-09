@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UploadImageSuccess } from '../interfaces/upload.image.success';
 import { ApiConstants } from '../constants/api.constants';
+import { environment } from '../../../environment/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,15 +32,14 @@ export class UserService {
   uploadImage(file: File) {
     const fd = new FormData();
     fd.append('image', file);
-    // There will be a user because we are only calling this function when they are logged in!
-    const user = this.$userSubject.getValue() as AuthSuccess;
 
-    this.http
-      .post<UploadImageSuccess>(ApiConstants.UPLOAD_IMAGE, fd)
-      .subscribe((res) => {
-        user.image = res.image;
-        this.updateUser(user);
-      });
+    return this.http.post<UploadImageSuccess>(
+      environment.apiBaseUrl + ApiConstants.UPLOAD_IMAGE,
+      fd,
+      {
+        observe: 'response',
+      },
+    );
   }
 
   updateUser(user: AuthSuccess) {
