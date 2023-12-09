@@ -35,4 +35,9 @@
       </div>
     </ng-template>
   </div>
+  <div *ngIf="FILE_ERROR_MESSAGE">
+    <p class="!ml-1 !mt-1 text-sm text-red-500">
+      {{ FILE_ERROR_MESSAGE }}
+    </p>
+  </div>
 </div>
