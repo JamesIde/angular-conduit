@@ -3,8 +3,9 @@
   <textarea matInput [formControl]="control" maxlength="250" rows="4">
   </textarea>
 
-  <!-- <mat-error *ngIf="form.get('descriptionOfDuties')?.hasError('pattern')">
-      Brief description of duties contains invalid characters.
-    </mat-error> -->
-  <mat-hint> There is a maximum limit of 250 characters in this box </mat-hint>
+  <mat-hint>
+    <p class="italic">
+      {{ 250 - control.value.length }} / 250 characters remaining
+    </p>
+  </mat-hint>
 </mat-form-field>

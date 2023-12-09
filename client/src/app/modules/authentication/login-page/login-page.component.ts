@@ -11,7 +11,7 @@ import { MaterialModule } from '../../../shared/material/material.module';
 import { FormUtils } from '../../../core/utils/FormUtils';
 import { PasswordComponent } from '../../../shared/password/password.component';
 import { Login } from '../../../core/interfaces/login';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 import { takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';

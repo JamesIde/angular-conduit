@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Exists } from '../../core/interfaces/exists';
+import { Exists } from '../interfaces/exists';
 import { environment } from '../../../environment/environment';
-import { ApiConstants } from '../../core/constants/api.constants';
-import { Login } from '../../core/interfaces/login';
-import { AuthSuccess } from '../../core/interfaces/auth.success';
-import { Register } from '../../core/interfaces/register';
+import { ApiConstants } from '../constants/api.constants';
+import { Login } from '../interfaces/login';
+import { AuthSuccess } from '../interfaces/auth.success';
+import { Register } from '../interfaces/register';
 
 @Injectable({
   providedIn: 'root',

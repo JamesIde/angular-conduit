@@ -80,10 +80,20 @@ export async function retrieveUserPasswordByEmail(email: string) {
 }
 
 export async function updateProfilePicture(userId: string, imageUrl: string) {
-  console.log(`test`, userId, imageUrl);
   return await prisma.user.update({
     data: {
       image: imageUrl,
+    },
+    where: {
+      id: userId,
+    },
+  });
+}
+
+export async function updateUserBio(userId: string, bio: string) {
+  return await prisma.user.update({
+    data: {
+      bio,
     },
     where: {
       id: userId,

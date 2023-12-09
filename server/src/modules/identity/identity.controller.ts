@@ -209,3 +209,34 @@ export async function uploadProfilePicture(
     next(error);
   }
 }
+
+export async function updateUserBio(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { bio } = req.body;
+
+    if (!bio) {
+      throw new AppError(
+        `An error occured updating user ${req.userId}`,
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
+    const updatedUser = await identityRepository.updateUserBio(req.userId, bio);
+
+    if (!updatedUser) {
+      throw new AppError(
+        `An error occured updating user ${req.userId}`,
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
+    return res.status(HttpStatus.OK).json({
+      bio,
+    });
+  } catch (error) {
+    next(error);
+  }
+}

@@ -5,7 +5,6 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { AuthenticationService } from '../../modules/authentication/authentication.service';
 import {
   Observable,
   debounceTime,
@@ -14,6 +13,7 @@ import {
   switchMap,
   take,
 } from 'rxjs';
+import { AuthenticationService } from '../services/authentication.service';
 
 export class FormUtils {
   static printFormErrors(form: UntypedFormGroup) {

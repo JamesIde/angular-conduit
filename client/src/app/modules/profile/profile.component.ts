@@ -3,7 +3,12 @@ import { AbstractCommonUser } from '../../core/classes/abstractCommonUser';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { BioComponent } from '../../shared/bio/bio.component';
 import { MaterialModule } from '../../shared/material/material.module';
 
@@ -21,6 +26,11 @@ export class ProfileComponent extends AbstractCommonUser {
   ) {
     super(userService);
   }
+
+  form = new FormGroup({
+    bio: new FormControl('', [Validators.maxLength(250)]),
+  });
+
   override ngOnInit() {
     super.ngOnInit();
 
@@ -31,11 +41,9 @@ export class ProfileComponent extends AbstractCommonUser {
     }
   }
 
-  form = new FormGroup({
-    bio: new FormControl(''),
-  });
-
-  close() {
+  closeModal() {
     this.dialog.closeAll();
   }
+
+  save() {}
 }

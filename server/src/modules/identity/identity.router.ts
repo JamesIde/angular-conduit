@@ -17,4 +17,6 @@ router.post(
   sessionValidator,
   identityController.uploadProfilePicture
 );
+
+router.post("/bio", sessionValidator, identityController.updateUserBio);
 export default router;
