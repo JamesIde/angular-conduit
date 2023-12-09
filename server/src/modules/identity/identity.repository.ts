@@ -45,6 +45,15 @@ export async function findUserByUsername(username: string) {
   return user ? true : false;
 }
 
+export async function findUserById(id: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+  return user ? true : false;
+}
+
 export async function retrieveUserByEmail(email: string): Promise<UserSession> {
   const user = await prisma.user.findFirst({
     where: {

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpStatus } from "../../common/enum/status";
-import { RedisService } from "../../redis/redis.service";
+import { AuthUtilityService } from "../../authUtility/auth.utility.service";
 import * as bcrypt from "bcrypt";
 import * as identityRepository from "./identity.repository";
 import * as fileService from "../files/file.service";
@@ -68,7 +68,7 @@ export async function registerUser(
       );
     }
 
-    return RedisService.setAndReturnSession(res, user);
+    return AuthUtilityService.setTokenAndReturnUser(res, user);
   } catch (error) {
     next(error);
   }
@@ -122,7 +122,7 @@ export async function loginUser(
       bio: user.bio,
       image: user.image,
     } as any;
-    return RedisService.setAndReturnSession(res, login);
+    return AuthUtilityService.setTokenAndReturnUser(res, login);
   } catch (error) {
     next(error);
   }

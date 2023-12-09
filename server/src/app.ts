@@ -13,8 +13,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { notFound } from "./middlewares/notFound";
-import { sessionValidator } from "./middlewares/sessionValidator";
-import { ServerConstants } from "./common/constants/server.constants";
+
 const app = express();
 
 app.use(helmet());
@@ -25,9 +24,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "http://localhost:4200",
-    credentials: true,
-    exposedHeaders: "Set-Cookie",
+    origin: ServerConfig.CLIENT_URL(),
   })
 );
 
