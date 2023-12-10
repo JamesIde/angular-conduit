@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { TokenService } from "../token/token.service";
+import { TokenService } from "../modules/token/token.service";
 import { ServerConstants } from "../common/constants/server.constants";
 import AppError from "../common/interface/AppError";
 import { HttpStatus } from "../common/enum/status";

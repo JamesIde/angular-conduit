@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpStatus } from "../../common/enum/status";
-import { TokenService } from "../../token/token.service";
+import { TokenService } from "../token/token.service";
 import * as bcrypt from "bcrypt";
 import * as identityRepository from "./identity.repository";
 import * as fileService from "../files/file.service";

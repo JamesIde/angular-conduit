@@ -1,10 +1,10 @@
 import { Response } from "express";
-import { UserSession } from "../common/types/identity";
+import { UserSession } from "../../common/types/identity";
 
-import { ServerConfig } from "../config/server.config";
+import { ServerConfig } from "../../config/server.config";
 import jsonwebtoken from "jsonwebtoken";
-import AppError from "../common/interface/AppError";
-import { HttpStatus } from "../common/enum/status";
+import AppError from "../../common/interface/AppError";
+import { HttpStatus } from "../../common/enum/status";
 
 export class TokenService {
   static async verifyToken(token: string) {
