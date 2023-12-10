@@ -6,7 +6,7 @@ import jsonwebtoken from "jsonwebtoken";
 import AppError from "../common/interface/AppError";
 import { HttpStatus } from "../common/enum/status";
 
-export class AuthUtilityService {
+export class TokenService {
   static async verifyToken(token: string) {
     try {
       const decodedToken = jsonwebtoken.verify(

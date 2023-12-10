@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthUtilityService } from "../authUtility/auth.utility.service";
+import { TokenService } from "../token/token.service";
 import { ServerConstants } from "../common/constants/server.constants";
 import AppError from "../common/interface/AppError";
 import { HttpStatus } from "../common/enum/status";
@@ -12,7 +12,7 @@ export async function tokenValidator(
   try {
     if (req.headers["authorization"]) {
       const token = req.headers["authorization"].split(" ")[1];
-      const decodedToken = await AuthUtilityService.verifyToken(token);
+      const decodedToken = await TokenService.verifyToken(token);
 
       const isValidUser = await identityRepository.findUserById(
         decodedToken.id
