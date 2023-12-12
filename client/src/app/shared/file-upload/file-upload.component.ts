@@ -18,20 +18,10 @@ export class FileUploadComponent {
 
   FILE_ERROR_MESSAGE: string = '';
 
-  uploading: boolean = false;
-
   @Output() fileSelected = new EventEmitter<File>();
 
   toggleUploadDiv() {
     this.showUploadDiv = !this.showUploadDiv;
-  }
-
-  toggleUploading(override?: boolean) {
-    if (override) {
-      this.uploading = override;
-    } else {
-      this.uploading = !this.uploading;
-    }
   }
 
   onFileChange(ev: Event | File) {

@@ -9,7 +9,6 @@ import { MaterialModule } from '../material/material.module';
   styleUrl: './login-register-button.component.scss',
 })
 export class LoginRegisterButtonComponent {
-  @Input() loading: boolean = false;
   @Input() label: string = '';
 
   @Input() disabled: boolean = false;

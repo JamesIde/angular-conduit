@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NgHttpLoaderModule } from 'ng-http-loader';
+import { NgHttpLoaderModule, SpinnerVisibilityService } from 'ng-http-loader';
 import { HeaderComponent } from './shared/header/header.component';
+import { AuthenticationService } from './core/services/authentication.service';
+import { UserService } from './core/services/user.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,6 +19,19 @@ import { HeaderComponent } from './shared/header/header.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(
+    private authService: AuthenticationService,
+    private userService: UserService,
+    private router: Router,
+  ) {}
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    } else {
+      this.userService.logout();
+    }
+  }
+
   title = 'client';
 }

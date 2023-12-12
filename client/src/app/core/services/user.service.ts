@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { UploadImageSuccess } from '../interfaces/upload.image.success';
 import { ApiConstants } from '../constants/api.constants';
 import { environment } from '../../../environment/environment';
+import { BioSuccess } from '../interfaces/bio.success';
 @Injectable({
   providedIn: 'root',
 })
@@ -39,6 +40,13 @@ export class UserService {
       {
         observe: 'response',
       },
+    );
+  }
+
+  updateBio(bio: string) {
+    return this.http.post<BioSuccess>(
+      environment.apiBaseUrl + ApiConstants.UPDATE_BIO,
+      { bio },
     );
   }
 

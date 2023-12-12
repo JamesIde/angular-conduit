@@ -22,7 +22,5 @@ export class HeaderComponent extends AbstractCommonUser implements OnInit {
     super(userService);
     super.ngOnInit();
   }
-  override ngOnInit(): void {
-    this.appService.openProfile();
-  }
+  override ngOnInit(): void {}
 }

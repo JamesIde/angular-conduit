@@ -42,7 +42,6 @@ export class LoginPageComponent
   ) {
     super(userService);
   }
-  loading: boolean = false;
 
   override form = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -63,20 +62,17 @@ export class LoginPageComponent
     const user = {} as Login;
     user.email = this.form.value.email || '';
     user.password = this.form.value.password || '';
-    this.loading = true;
     this.authService
       .login(user)
       .pipe(takeUntil(this.notifier))
       .subscribe({
         next: (response) => {
-          this.loading = false;
           console.log(response);
           if (response.body) {
             this.userService.handleAuthSuccess(response.body);
           }
         },
         error: (error) => {
-          this.loading = false;
           console.log(error);
         },
       });

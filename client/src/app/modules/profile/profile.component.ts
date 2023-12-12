@@ -44,9 +44,9 @@ export class ProfileComponent extends AbstractCommonUser {
   override ngOnInit() {
     super.ngOnInit();
 
-    if (this.user?.bio) {
-      this.form.setValue({
-        bio: this.user?.bio,
+    if (this.user?.user.bio) {
+      this.form.patchValue({
+        bio: this.user?.user.bio,
       });
     }
   }
@@ -55,24 +55,29 @@ export class ProfileComponent extends AbstractCommonUser {
     this.dialog.closeAll();
   }
 
-  save() {}
+  save() {
+    this.userService.updateBio(this.form.value.bio ?? '').subscribe((res) => {
+      if (this.user) {
+        this.user.user.bio = res.bio;
+        this.userService.updateUser(this.user);
+        this.form.markAsPristine();
+      }
+    });
+  }
 
   uploadImage(file: File) {
-    this.fileUploader.toggleUploading(true);
     this.userService
       .uploadImage(file)
       .pipe(takeUntil(this.notifier))
       .subscribe({
         next: (res) => {
           if (this.user) {
-            this.user.image = res.body!.image;
+            this.user.user.image = res.body!.image;
             this.userService.updateUser(this.user);
-            this.fileUploader.toggleUploading(false);
             this.fileUploader.toggleUploadDiv();
           }
         },
         error: (err) => {
-          this.fileUploader.toggleUploading(false);
           console.log(err);
         },
       });

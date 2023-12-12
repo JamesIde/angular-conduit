@@ -1,6 +1,6 @@
 <div>
   <div
-    class="mt-3 h-24 rounded-sm border-[2px] border-dotted border-neutral-300 bg-[#eee]"
+    class="mt-3 h-24 cursor-pointer rounded-sm border-[2px] border-dotted border-neutral-300 bg-[#f8f6f6]"
     *ngIf="showUploadDiv"
     [@slide]
     appDragDrop
@@ -8,13 +8,12 @@
   >
     <!-- Set as text to avoid opening browser when uploading -->
     <input
-      [type]="uploading ? 'text' : 'file'"
+      type="file"
       (change)="onFileChange($event)"
       accept=".jpeg, .jpg, .png"
-      class="absolute h-48 cursor-pointer border-2 border-red-500 opacity-0"
-      [ngClass]="{ 'cursor-not-allowed': uploading }"
+      class="absolute h-48 border-2 border-red-500 opacity-0"
     />
-    <ng-container *ngIf="!uploading; else uploaderSpinner">
+    <ng-container>
       <div class="mt-[24px] flex flex-col items-center justify-center">
         <div>
           <mat-icon>cloud_upload</mat-icon>
@@ -24,16 +23,6 @@
         </div>
       </div></ng-container
     >
-    <ng-template #uploaderSpinner>
-      <div class="mt-[16px] flex flex-col items-center justify-center">
-        <div>
-          <mat-spinner diameter="48"></mat-spinner>
-        </div>
-        <div>
-          <p>Uploading...</p>
-        </div>
-      </div>
-    </ng-template>
   </div>
   <div *ngIf="FILE_ERROR_MESSAGE">
     <p class="!ml-1 !mt-1 text-sm text-red-500">

@@ -46,7 +46,6 @@ export class RegisterPageComponent extends AbstractCommonFormComponent {
   ) {
     super(userService);
   }
-  loading: boolean = false;
   override ngOnInit(): void {}
 
   override form = new FormGroup(
@@ -104,20 +103,17 @@ export class RegisterPageComponent extends AbstractCommonFormComponent {
       name: this.form.value.name || '',
       password: this.form.value.password || '',
     } as Register;
-    this.loading = true;
     this.authService
       .register(user)
       .pipe(takeUntil(this.notifier))
       .subscribe({
         next: (res) => {
-          this.loading = false;
           console.log(res);
           if (res.body) {
             this.userService.handleAuthSuccess(res.body);
           }
         },
         error: (err) => {
-          this.loading = false;
           console.log(err);
         },
       });
